@@ -1,9 +1,24 @@
+import Adapter.StandardSocket;
+import Adapter.Tesla;
+import Adapter.TeslaAdapter;
+import Chain_of_Responsibility.CheckHandler;
+import Chain_of_Responsibility.EngineHandler;
+import Chain_of_Responsibility.WheelHandler;
+import Decorator.ArmoredDecorator;
+import Decorator.IVehicle;
+import Decorator.SimpleVehicle;
+import builder.Car;
+import builder.CarBuilder;
+import strategy.CarController;
+import strategy.EcoMode;
+import strategy.SportMode;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
     System.out.println("--- 1. BUILDER (Создание автомобиля) ---");
-    Car myCar = new Car.CarBuilder()
-            .setModel("Tesla Model S")
+    Car myCar = new CarBuilder()
+            .setModel("Adapter.Tesla Model S")
             .setEngine("Электрический")
             .setColor("Красный")
             .addGPS()
@@ -11,14 +26,14 @@ void main() {
     System.out.println("Автомобиль создан : " + myCar.getModel());
 
     System.out.println("\n--- 2. DECORATOR (Добавлены роскошные опции) ---");
-    IVehicle basicCar = new SimpleVehicle("Tesla");
+    IVehicle basicCar = new SimpleVehicle("Adapter.Tesla");
     IVehicle armoredCar = new ArmoredDecorator(basicCar);
     System.out.println("Описание : " + armoredCar.getDescription());
 
     System.out.println("\n--- 3. PROXY (Контроль доступа по возрасту) ---");
-    VehicleStarter driver1 = new CarProxy(16); // Trop jeune
+    Proxy.VehicleStarter driver1 = new Proxy.CarProxy(16);
     driver1.start();
-    VehicleStarter driver2 = new CarProxy(25); // Adulte
+    Proxy.VehicleStarter driver2 = new Proxy.CarProxy(25);
     driver2.start();
 
     System.out.println("\n--- 4. STRATEGY (Изменение режима вождения) ---");
